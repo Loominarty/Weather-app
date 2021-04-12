@@ -1,32 +1,77 @@
 *{
   margin:0;
 }
+html{
+  background-image:url(background/weather-3.jpg);
+  background-size:cover;
+  background-position:center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 .navbar{
-  padding:20px;
-  display:flex;
-  align-items:center;
-  max-width:100%;
-  margin:0 auto;
-  border-bottom:1px solid #f2f2f2;
- 
+  height: 100%; /* 100% Full-height */
+  width: 20%; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
 .navbar .links{
   margin-left:auto;
   margin-right:auto;
+  
+  text-decoration-color: none;
+  
 }
 .navbar a{
+  color:black;
   margin-left:15px;
   text-decoration:none;
   padding:6px;
 }
-.content{
-  display:flex;
-  flex-direction:row;
-  max-width:600px;
-  margin:40px auto;
-  padding:20px;
 
+
+
+
+.hamburger-container {
+  position:absolute;
+left:86%;
+top:1%;
+  display: inline-block;
+  cursor: pointer;
 }
-.player-container{
-  display:flex;
+
+.bar1, .bar2, .bar3 {
+  width: 25px;
+  height: 2px;
+  background-color: #333;
+  margin: 6px 0;
+  transition: 0.4s;
+  background-color:white;
+}
+
+.change .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-6px, 4px);
+  transform: rotate(-45deg) translate(-4px, 4px);
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
+}
+.city_form_container{
+  
+  position:absolute;
+  top:50%;
+}
+.city_form_container .submit_city{
+  background-color:transparent;
+  border:none;
+  color:white;
 }
