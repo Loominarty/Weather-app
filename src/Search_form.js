@@ -1,27 +1,76 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+//import ReactDOM from 'react-dom';
+//import {useState} from 'react';
+import axios from 'axios';
+const SearchForm = ({sendDataToParent}) => {
+  
+  
 
-class SearchForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { city_input: '' };
+
+
+
+
+ 
+  const handleSubmit = (event) => {
+
+     event.preventDefault();
+    const data= new FormData(document.querySelector('#form'));
+    
+    data.set('cityInput', data.get('cityInput'));
+    
+    
+    axios.post("http://localhost:8080/city",data)
+    .then(response =>{
+      if(response.status===200){
+
+      }
+      
+    }) 
+    
+    .catch(error =>{
+     
+      console.log(error);
+    })
+  
+axios({
+method: 'post',
+url: 'http://localhost:8080/weather'
+    })
+    .then(response =>{
+if(response.data.cod===200){
+  sendDataToParent(response.data)
+}
+
+
+    })
+    .catch(error =>{
+console.log(error);
+    })
+/*
+const forecastRequest = axios({
+  method: 'post',
+  url: 'http://localhost:8080/forecast'
+})
+*/
+
+
   }
-  mySubmitHandler = (event) => {
-    event.preventDefault();
-  }
-  myChangeHandler = (event) => {
-    this.setState({city_input: event.target.value});
-  }
-  render() {
+  
+  
+  
     return (
         <div className="city_form_container">
-      <form>
-      <input
-        type='text' placeholder="Įveskite miestą" className="city_input" onChange={this.myChangeHandler}/>
-      <button type="submit" className="submit_city"> <i class="fas fa-plus"></i> </button>
+      <form method="post" action="/city" encType="multipart/form-data" onSubmit={handleSubmit} id="form">
+        <div className="material-texfield">
+      <input type='text' placeholder=" " className="city_input" name="cityInput" required/>
+      <label className="city_label">Įveskite miestą </label>
+      </div>
+      <button type="submit" className="submit_city"> <i className="fas fa-plus"></i><span> Pridėti miestą</span> </button>
       </form>
+      
     </div>
+    
     );
-  }
+  
 }
 export default SearchForm;
