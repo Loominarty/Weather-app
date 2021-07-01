@@ -1,6 +1,5 @@
-import {useState, useEffect} from 'react';
-import useFetch from './useFetch';
-import Navbar from './Navbar';
+import React from 'react';
+
 const Home = () => {
 
     
