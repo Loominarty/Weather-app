@@ -4,6 +4,7 @@
 
 .background{
    background-image:url(background/weather-3.jpg);
+ 
   width:100%;
   height:100%;
   background-size:cover;
@@ -11,12 +12,14 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   position: fixed;
-    overflow: auto;
+    z-index:0;
     top: 0px;
     left: 0px;
     filter: blur(2px);
 }
+
 .navbar{
+
   display:flex;
   flex-direction:column;
   height:93.5%; /* 100% Full-height */
@@ -177,8 +180,8 @@ top:1%;
 }
 .remove-button{
   position:relative;
-  top:-90px;
-  left:95%;
+  top:-130px;
+  left:93%;
   padding:5;
   background:transparent;
   color:white;
@@ -201,4 +204,73 @@ top:1%;
 }
 .city-id,.city-name,.city-temperature,.city-pressure,.city-wind,.city-humidity{
   color:white;
+}
+.Info-screen{
+  font-family: 'Roboto', sans-serif;
+  display:flex;
+  z-index:2;
+  color:white;
+  position:absolute;
+  width:73%;
+  height:98%;
+  top:1rem;
+  left:23rem;
+  
+}
+a{
+  display:hidden;
+  margin:0;
+  padding:0;
+}
+.temperature-label,.wind-label,.humidity-label,.pressure-label{
+  color:grey;
+}
+.current-city-data{
+  background: rgba(0, 0, 0, 0.3);
+ 
+width:100%;
+height:50%;
+margin-left:35px
+
+}
+.current-city-name{
+  position:absolute;
+  left:40%;
+  top:0%;
+  text-align:center;
+  font-size:70px;
+  font-weight: 400;
+}
+.current-date{
+  position:absolute;
+  font-size:20px;
+  left:46%;
+  top:10%;
+  text-align:center;
+}
+.current-city-temp{
+  position:absolute;
+  left:45%;
+  top:20%;
+  text-align:center;
+  font-size:70px;
+  font-weight: 400;
+}
+.current-city-wind{
+  position:absolute;
+  left:12%;
+  top:40%;
+  font-size:30px;
+}
+.current-city-pressure{
+  position:absolute;
+  left:46%;
+  top:40%;
+  font-size:30px;
+}
+.current-city-humidity{
+  position:absolute;
+  left:80%;
+  top:40%;
+  font-size:30px;
 }
