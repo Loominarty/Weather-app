@@ -12,14 +12,16 @@ function App() {
       
     
     <Router>
+      
     <div className="App">
-    <div className="background"> </div>
+    
       <SideBar/>
   
     
        
      
      <div className="content">
+     <div className="background"></div> 
  <Switch>
    <Route exact path="/">
 <Home/>
@@ -29,9 +31,9 @@ function App() {
    </Route>
  </Switch>
 
-     </div>
+    
       
-     
+     </div>
       
       
        
