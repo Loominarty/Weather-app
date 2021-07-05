@@ -3,7 +3,7 @@
 }
 
 .background{
-   background-image:url(background/weather-3.jpg);
+   background-image:url(background/weather-5.jpg);
  
   width:100%;
   height:100%;
@@ -29,7 +29,7 @@
   z-index: 1; /* Stay on top */
   top: 0; /* Stay at the top */
   left: 0rem;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(255, 255, 255, 0.2);
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 60px; /* Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
@@ -116,7 +116,7 @@ top:1%;
    border-right:none;
    border-left:none;
    font-size: 1rem;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid white;
   padding: 1rem 0.7rem;
   outline: none;
   transition: 0.1s ease-out;
@@ -212,9 +212,9 @@ top:1%;
   color:white;
   position:absolute;
   width:73%;
-  height:98%;
-  top:1rem;
-  left:23rem;
+  height:95%;
+  top:0rem;
+  left:27rem;
   
 }
 a{
@@ -226,11 +226,12 @@ a{
   color:grey;
 }
 .current-city-data{
-  background: rgba(0, 0, 0, 0.3);
- 
+  background: rgba(255, 255, 255, 0.2);
+ display:flex;
+
 width:100%;
 height:50%;
-margin-left:35px
+
 
 }
 .current-city-name{
@@ -238,13 +239,13 @@ margin-left:35px
   left:40%;
   top:0%;
   text-align:center;
-  font-size:70px;
+  font-size:4vmax;
   font-weight: 400;
 }
 .current-date{
   position:absolute;
-  font-size:20px;
-  left:46%;
+  font-size:2vmax;
+  left:44%;
   top:10%;
   text-align:center;
 }
@@ -253,24 +254,35 @@ margin-left:35px
   left:45%;
   top:20%;
   text-align:center;
-  font-size:70px;
+  font-size:4vmax;
   font-weight: 400;
 }
 .current-city-wind{
   position:absolute;
   left:12%;
   top:40%;
-  font-size:30px;
+  font-size:2vmax;
 }
 .current-city-pressure{
   position:absolute;
   left:46%;
   top:40%;
-  font-size:30px;
+  font-size:2vmax;
 }
 .current-city-humidity{
   position:absolute;
   left:80%;
   top:40%;
-  font-size:30px;
+  font-size:2vmax;
+}
+.forecast-data{
+  background: rgba(255, 255, 255, 0.2);
+  margin-top:10px;
+  position:absolute;
+  display:flex;
+  top:50%;
+  left:0%;
+  width:100%;
+  height:50%;
+  color:white;
 }
