@@ -4,8 +4,10 @@ import {useEffect, useState} from 'react'
 import axios from 'axios'
 const InfoScreen = React.memo((props) =>{
 const { name } = useParams();
-
+const [Forecast,setForecast] = useState([]);
 const [CityResponse, setCityResponse]=useState(null);
+const [UniqueDates,setUniqueDates]=useState([]);
+const [AverageTemp, setAverageTemp]=useState([])
 const location=useLocation();
 var date= new Date().toLocaleDateString('lt');
 
@@ -23,7 +25,7 @@ console.log(response)
 },[name])
 
 
-/*
+
  useEffect(() =>{
     if(CityResponse!==null){
    axios({
@@ -31,16 +33,23 @@ console.log(response)
    url: 'http://localhost:8080/forecast/:name'
  })
  .then(res=>{
-
-console.log(res.data)
+setForecast(res.data)
+console.log(Forecast)
  })
     }
 
-console.log(date);
-
+//console.log(date);
+if(Forecast.length!==0){
+   getUniqueDates();
+}
+  
  },[CityResponse])
  
- */
+ const getUniqueDates = () =>{
+const dates = Forecast.list.map(x => x.dt_txt.split(" ")[0]);
+setUniqueDates([...new Set(dates)]);
+console.log(UniqueDates)
+}
 
 
 
@@ -59,7 +68,14 @@ return (
 <p className="current-city-pressure"><span className="pressure-label">Slėgis</span><br/>{location.state.current_pressure} mbar</p>
 <p className="current-city-humidity"><span className="humidity-label">Drėgmė</span><br/>{location.state.current_humidity}%</p>
    </div>
-   
+   <div className="forecast-data">
+{
+   UniqueDates.map((item) =>{
+    
+      <div className="forecast-card">{item}</div>
+   })
+}
+   </div>
 </div>
 
 
