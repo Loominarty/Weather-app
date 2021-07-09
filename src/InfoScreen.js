@@ -28,8 +28,12 @@ console.log(response)
 
  useEffect(() =>{
     if(CityResponse!==null){
-   axios({
+   axios.post({
    method: 'post',
+   headers: {
+"Accept-Language":"en-US,en,lt;"
+   },
+   allow_headers: ['Content-Type', 'Authorization', 'locale'],
    url: 'http://localhost:8080/forecast/:name'
  })
  .then(res=>{
@@ -39,6 +43,7 @@ console.log(Forecast)
     }
 
 //console.log(date);
+
 if(Forecast.length!==0){
    getUniqueDates();
 }
@@ -50,7 +55,10 @@ const dates = Forecast.list.map(x => x.dt_txt.split(" ")[0]);
 setUniqueDates([...new Set(dates)]);
 console.log(UniqueDates)
 }
+const getAverageTemp = () =>{
+const average = Forecast.l
 
+}
 
 
 
@@ -70,10 +78,21 @@ return (
    </div>
    <div className="forecast-data">
 {
-   UniqueDates.map((item) =>{
+   UniqueDates.map((item) =>
     
-      <div className="forecast-card">{item}</div>
-   })
+      <div className="forecast-card" key={item}>
+         <div className="forecast-info">
+
+
+
+
+            <div className="forecast-date">{item}</div>
+
+                  </div>
+      
+      
+      </div>
+   )
 }
    </div>
 </div>
