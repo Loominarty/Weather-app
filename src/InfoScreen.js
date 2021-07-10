@@ -48,6 +48,7 @@ console.log(Forecast)
 useEffect(()=>{
    if(Forecast.length!==0){
      getUniqueDates(Forecast); 
+     getAverageTemp(Forecast);
    }
 
 
@@ -56,17 +57,30 @@ useEffect(()=>{
 const getUniqueDates = (forecastdata) =>{
 const dates = forecastdata.list.map(x => x.dt_txt.split(" ")[0]);
 setUniqueDates([...new Set(dates)]);
-console.log(UniqueDates)
+//console.log(UniqueDates)
 
 }
  
  
-/*
-const getAverageTemp = () =>{
-const average = Forecast.l
 
+const getAverageTemp = (forecastdata) =>{
+   
+const temps = forecastdata.list.map(x => x.main.temp)
+const dates= forecastdata.list.map(x => x.dt_txt.split(" ")[0]);
+const merged_array = [];
+
+for(var i=0;i<temps.length;i++){
+   merged_array.push(`${dates[i]} ${temps[i]}`)
 }
-*/
+const splited_array=merged_array.map(x => x.split(" "))
+const average = splited_array.reduce((accumulator, currentValue,index) =>{
+if(currentValue[index]===currentValue[index++]){
+   (accumulator+currentValue)/splited_array.length
+}
+})
+console.log(average)
+//console.log(Forecast.city.name)
+}
 
 
  

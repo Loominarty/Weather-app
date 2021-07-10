@@ -293,15 +293,20 @@ height:50%;
   position:relative;
   display:flex;
   flex-direction: row;
-  flex-shrink: inherit;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
   top:25%;
-  width:50%;
-  height:50%;
+  width:20%;
+  height:35%;
   color:white;
 }
-.forecast-date{
+.forecast-info{
   position:relative;
   
   top:1rem;
- left:4rem;
+ left:3.5rem;
+}
+.forecast-date{
+  font-size:1vw;
+  
 }
