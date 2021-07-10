@@ -30,36 +30,43 @@ console.log(response)
     if(CityResponse!==null){
    axios.post({
    method: 'post',
-   headers: {
-"Accept-Language":"en-US,en,lt;"
-   },
-   allow_headers: ['Content-Type', 'Authorization', 'locale'],
    url: 'http://localhost:8080/forecast/:name'
  })
  .then(res=>{
+    
 setForecast(res.data)
+
 console.log(Forecast)
  })
+
+ 
     }
 
 //console.log(date);
-
-if(Forecast.length!==0){
-   getUniqueDates();
-}
   
  },[CityResponse])
- 
- const getUniqueDates = () =>{
-const dates = Forecast.list.map(x => x.dt_txt.split(" ")[0]);
+useEffect(()=>{
+   if(Forecast.length!==0){
+     getUniqueDates(Forecast); 
+   }
+
+
+},[Forecast])
+
+const getUniqueDates = (forecastdata) =>{
+const dates = forecastdata.list.map(x => x.dt_txt.split(" ")[0]);
 setUniqueDates([...new Set(dates)]);
 console.log(UniqueDates)
+
 }
+ 
+ 
+/*
 const getAverageTemp = () =>{
 const average = Forecast.l
 
 }
-
+*/
 
 
  
@@ -78,8 +85,16 @@ return (
    </div>
    <div className="forecast-data">
 {
-   UniqueDates.map((item) =>
+
+ UniqueDates && UniqueDates.length > 0 ? UniqueDates.map(item =>
+
+ 
+
+   
+
+   
     
+       
       <div className="forecast-card" key={item}>
          <div className="forecast-info">
 
@@ -92,7 +107,8 @@ return (
       
       
       </div>
-   )
+  ):"Kraunama"
+  
 }
    </div>
 </div>
