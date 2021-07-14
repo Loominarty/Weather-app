@@ -292,7 +292,7 @@ height:50%;
   margin-right:5px;
   position:relative;
   display:flex;
-  flex-direction: row;
+  flex-direction: column;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   top:25%;
@@ -301,12 +301,22 @@ height:50%;
   color:white;
 }
 .forecast-info{
-  position:relative;
-  
-  top:1rem;
- left:3.5rem;
+  display:flex;
+  font-family: 'Roboto', sans-serif;
+  justify-content: center;
+  align-items: center;
 }
 .forecast-date{
-  font-size:1vw;
   
+  font-size:1vmax;
+ position:absolute;
+ top:10%;
+ left:30%;
+}
+.forecast-average-temp{
+
+  font-size:1.5vmax;
+ position:absolute;
+ top:45%;
+ left:39%;
 }
