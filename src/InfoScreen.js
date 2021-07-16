@@ -6,11 +6,20 @@ const InfoScreen = React.memo((props) =>{
 const { name } = useParams();
 const [Forecast,setForecast] = useState([]);
 const [CityResponse, setCityResponse]=useState(null);
-const [UniqueDates,setUniqueDates]=useState([]);
+
+const [ActiveArrow,setActiveArrow]=useState(null);
 const [AverageTemp, setAverageTemp]=useState([])
 const location=useLocation();
 var date= new Date().toLocaleDateString('lt');
-
+const toggleClass = (e,index) =>{
+   let element_class = document.getElementsByClassName('arrow-icon');
+   //console.log(element_class)
+   element_class[index].classList.toggle('open');
+  // e.classList.toggle('open')
+ // console.log(e.currentTarget.className);
+   
+   
+}
 useEffect(() =>{
 axios.post("http://localhost:8080/forecast/selected_city",{name: name})
 .then(response =>{
@@ -54,14 +63,8 @@ useEffect(()=>{
 
 },[Forecast])
 
-const getUniqueDates = (forecastdata) =>{
-const dates = forecastdata.list.map(x => x.dt_txt.split(" ")[0]);
-setUniqueDates([...new Set(dates)]);
-//console.log(UniqueDates)
 
-}
- 
- 
+
 
 const getAverageTemp = (forecastdata) =>{
    
@@ -69,7 +72,6 @@ const temps = forecastdata.list.map(x => x.main.temp)
 const dates= forecastdata.list.map(x => x.dt_txt.split(" ")[0]);
 const merged_array = [];
 let counts = [];
-let length = [];
 for(var i=0;i<temps.length;i++){
    merged_array.push(`${dates[i]} ${temps[i]}`)
 }
@@ -78,7 +80,7 @@ console.log(counts);
 const splited_array=merged_array.map(x => x.split(" "))
 const average = splited_array.reduce((accumulator, currentValue) => {
 if(!accumulator[currentValue[0]]){
-   accumulator[currentValue[0]]=0
+   accumulator[currentValue[0]]=0;
   
 }
 
@@ -132,7 +134,7 @@ return (
        
       <div className="forecast-card" key={i}>
          
-        
+       
          <div className="forecast-info">
 
 
@@ -141,11 +143,15 @@ return (
             <div className="forecast-date">{keyname}</div>
             <div className="forecast-average-temp">{AverageTemp[keyname]}&#176;C</div>
                   </div>
-      
-      
+                  <div>
+                  <a className={"arrow-icon"} onClick={(e)=>toggleClass(e,i)}>
+  <span className="left-bar"></span>
+  <span className="right-bar"></span>
+</a>
+           </div>      
       </div>
   ):"Kraunama"
-  
+   
 }
    </div>
 </div>
