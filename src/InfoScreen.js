@@ -6,8 +6,6 @@ const InfoScreen = React.memo((props) =>{
 const { name } = useParams();
 const [Forecast,setForecast] = useState([]);
 const [CityResponse, setCityResponse]=useState(null);
-
-const [ActiveArrow,setActiveArrow]=useState(null);
 const [AverageTemp, setAverageTemp]=useState([])
 const location=useLocation();
 var date= new Date().toLocaleDateString('lt');
@@ -58,8 +56,9 @@ useEffect(()=>{
    if(Forecast.length!==0){
     // getUniqueDates(Forecast); 
      getAverageTemp(Forecast);
+     getTempsByTime(Forecast);
    }
-
+console.log(Forecast)
 
 },[Forecast])
 
@@ -83,28 +82,17 @@ if(!accumulator[currentValue[0]]){
    accumulator[currentValue[0]]=0;
   
 }
-
-  
-
-   
-
 accumulator[currentValue[0]]+=Math.round(parseFloat(currentValue[1]/counts[currentValue[0]]))
-
 return accumulator
 },{});
 setAverageTemp(average);
 console.log(AverageTemp);
-
-
-
-
-
-
-
-
 //console.log(average)
 }
+const getTempsByTime = (forecastdata) =>{
+  
 
+}
 
  
 
@@ -142,6 +130,12 @@ return (
 
             <div className="forecast-date">{keyname}</div>
             <div className="forecast-average-temp">{AverageTemp[keyname]}&#176;C</div>
+
+
+            
+
+
+
                   </div>
                   <div>
                   <a className={"arrow-icon"} onClick={(e)=>toggleClass(e,i)}>
