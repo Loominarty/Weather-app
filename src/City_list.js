@@ -67,7 +67,7 @@ return (
 <p className="city-name">Miestas: {item[0][0].name}</p>
 <p className="city-temperature">Temperatūra: {item[0][0].temp}&#176;C</p>
 <p className="city-wind">Vėjo greitis: {item[0][0].wind}m/s</p>
-<p className="city-pressure">Spaudimas: {item[0][0].pressure}mbar</p>
+<p className="city-pressure">Slėgis: {item[0][0].pressure}mbar</p>
 <p className="city-humidity">Drėgnumas: {item[0][0].humidity}%</p>
 </Link>
 
