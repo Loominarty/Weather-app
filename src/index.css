@@ -384,3 +384,23 @@ height:50%;
   transform-origin: center center;
   transform: rotate(70deg);
 }
+.forecast-by-time-box{
+width:100%;
+  color:white;
+  position:absolute;
+  top:50%;
+}
+.time-for-temps{
+  font-size:1vmax;
+  position:absolute;
+  width:21%;
+  margin:0px;
+}
+.temps-by-time{
+  width:10%;
+  position:relative;
+  top:0%;
+  margin:0px;
+  left:90%;
+  font-size:1vmax;
+}

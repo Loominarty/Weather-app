@@ -7,6 +7,7 @@ const { name } = useParams();
 const [Forecast,setForecast] = useState([]);
 const [CityResponse, setCityResponse]=useState(null);
 const [AverageTemp, setAverageTemp]=useState([])
+const [TempsByTime,setTempsByTime]=useState([]);
 const location=useLocation();
 var date= new Date().toLocaleDateString('lt');
 const toggleClass = (e,index) =>{
@@ -90,8 +91,15 @@ console.log(AverageTemp);
 //console.log(average)
 }
 const getTempsByTime = (forecastdata) =>{
-  
-
+   const dates= forecastdata.list.map(x => x.dt_txt.split(" ")[0]);
+const filtered_time = forecastdata.list.filter(date =>{
+dates.forEach(singledate=>{
+   date.dt_txt.includes(singledate)
+})
+return date
+})
+console.log(filtered_time)
+setTempsByTime(filtered_time)
 }
 
  
@@ -136,6 +144,14 @@ return (
 
 
 
+                  </div>
+                  <div className="forecast-by-time-box">
+                  {Forecast.list.filter(date=>date.dt_txt.includes(keyname)).map(filtereddates=>(
+                     <div className="forecast-by-time" key={filtereddates.dt_txt}>
+<p className="time-for-temps">{filtereddates.dt_txt.slice(11,16)}</p>
+<p className="temps-by-time">{Math.round(filtereddates.main.temp)}</p>
+</div>
+ ))}
                   </div>
                   <div>
                   <a className={"arrow-icon"} onClick={(e)=>toggleClass(e,i)}>
