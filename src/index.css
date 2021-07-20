@@ -293,11 +293,14 @@ height:50%;
   flex-wrap: wrap;
   top:10%;
   width:20%;
-  height:35%;
+  height:13rem;
   color:white;
+  
+  
 }
+
 .forecast-info{
-  display:flex;
+  
   font-family: 'Roboto', sans-serif;
   justify-content: center;
   align-items: center;
@@ -305,27 +308,27 @@ height:50%;
 .forecast-date{
   
   font-size:1vmax;
- position:absolute;
+ position:relative;
  top:10%;
  left:30%;
 }
 .forecast-average-temp{
 
   font-size:1.5vmax;
- position:absolute;
+ position:relative;
  top:45%;
  left:39%;
 }
 .arrow-icon {
+  height:2.8em;
+  width:2.8em;
   
-  height: 4.5rem;
-  width: 3.5rem;
   display: block;
   padding: 0;
   margin: 0;
   position: relative;
-  top:13vh;
-  left:4vw;
+  top:8rem;
+  left:4.5vw;
   cursor: pointer;
   border-radius: 4px;
 }
@@ -393,6 +396,7 @@ width:100%;
 .time-for-temps{
   font-size:1vmax;
   position:absolute;
+  left:10%;
   width:21%;
   margin:0px;
 }
@@ -401,6 +405,9 @@ width:100%;
   position:relative;
   top:0%;
   margin:0px;
-  left:90%;
+  left:75%;
   font-size:1vmax;
+}
+.hidden-forecast{
+  display:none;
 }
