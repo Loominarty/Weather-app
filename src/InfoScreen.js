@@ -16,15 +16,17 @@ const toggleClass = (e,index) =>{
    let forecast_box=document.getElementsByClassName('forecast-by-time-box');
    //console.log(element_class)
    arrow_class[index].classList.toggle('open');
-   if(arrow_class[index].classList.contains('open')){
-      forecast_class[index].classList.remove('closed-card');
-      forecast_class[index].classList.add('opened-card');
-      forecast_box[index].classList.remove('hidden-forecast');
-   }else{
    
+   if(arrow_class[index].classList.contains('open')){
+   forecast_class[index].classList.add('opened-card');
+      forecast_class[index].classList.remove('closed-card');
+      
+     forecast_box[index].classList.remove('hidden-forecast');
+   }else{
+   forecast_box[index].classList.add('hidden-forecast');
       forecast_class[index].classList.remove('opened-card');
       forecast_class[index].classList.add('closed-card');
-      forecast_box[index].classList.add('hidden-forecast');
+      
    }
   // e.classList.toggle('open')
  // console.log(e.currentTarget.className);
