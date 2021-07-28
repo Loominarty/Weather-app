@@ -22,19 +22,19 @@
 
   display:flex;
   flex-direction:column;
-  height:93.5%; /* 100% Full-height */
-  width: 23rem; /* 0 width */
+  height:93.5%;
+  width: 23rem; 
   
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
-  left: 0rem;
+  position: fixed; 
+  z-index: 1; 
+  top: 0; 
+  left: 0;
   background-color: rgba(255, 255, 255, 0.2);
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 60px; /* Place content 60px from the top */
-  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  overflow-x: hidden; 
+  padding-top: 60px; 
+  transition: 0.5s;
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
 }
 .navbar::-webkit-scrollbar{
   display:none;
@@ -128,7 +128,9 @@ top:1%;
 #cities-header{
   font-family: 'IBM Plex Sans', sans-serif;
   position:relative;
+  margin-top:1vw;
   left:8rem;
+  
   color:white;
 }
 .material-textfield {
@@ -164,7 +166,7 @@ top:1%;
 .cities-container{
   position:absolute;
   
-  top:18rem;
+  top:20rem;
   left:0rem;
  width:100%;
 }
@@ -224,13 +226,14 @@ top:1%;
 .current-city-data{
   background: rgba(255, 255, 255, 0.2);
  display:flex;
-
+font-family:'IBM Plex Sans', sans-serif;
 width:100%;
 height:50%;
 
 
 }
 .current-city-name{
+ 
   position:absolute;
   left:40%;
   top:0%;
@@ -273,8 +276,7 @@ height:50%;
 }
 .forecast-data{
 
-  margin-top:10px;
-  margin-left:1px;
+  margin-top:0.5vw;
   position:absolute;
   display:flex;
   top:50%;
@@ -282,19 +284,25 @@ height:50%;
   width:99%;
   height:50%;
   color:white;
+  justify-content:space-evenly;
+  align-content:space-between;
+  flex-direction: row;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+ 
 }
 .forecast-card{
   background: rgba(255, 255, 255, 0.2);
-  margin-left:5px;
-  margin-right:5px;
+  margin-left:0.26vw;
+  margin-right:0.26vw;
+  margin-bottom:10px;
+  margin-top:10px;
   position:relative;
-  display:flex;
-  flex-direction: column;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
+ 
+  
   top:10%;
-  width:20%;
-  height:13rem;
+  width:13rem;
+  height:10vw;
   color:white;
   transition:height 0.5s;
   
@@ -302,7 +310,7 @@ height:50%;
 
 .forecast-info{
   
-  font-family: 'Roboto', sans-serif;
+  font-family:'IBM Plex Sans', sans-serif;
   justify-content: center;
   align-items: center;
 }
@@ -321,15 +329,12 @@ height:50%;
  left:39%;
 }
 .arrow-icon {
-  height:2.8em;
-  width:2.8em;
-  
+  height:2.8vw;
+  width:2.8vw;
   display: block;
-  padding: 0;
-  margin: 0;
   position: absolute;
-  top:8rem;
-  left:4vw;
+  left:35%;
+  top:91%;
   cursor: pointer;
   border-radius: 4px;
 }
@@ -338,8 +343,8 @@ height:50%;
   background-color: transparent;
   top: 0;
   left: 0;
-  width: 39px;
-  height: 10px;
+  width: 2vw;
+  height: 0.26vw;
   display: block;
   transform: rotate(35deg);
   float: right;
@@ -349,9 +354,9 @@ height:50%;
   position: absolute;
   background-color: transparent;
   top: 0px;
-  left: 30px;
-  width: 40px;
-  height: 5px;
+  left: 1.5vw;
+  width: 2vw;
+  height: 0.26vw;
   display: block;
   transform: rotate(-35deg);
   float: right;
@@ -360,8 +365,8 @@ height:50%;
 .left-bar:after {
   content: "";
   background-color: white;
-  width: 40px;
-  height: 5px;
+  width: 2vw;
+  height: 0.26vw;
   display: block;
   float: right;
   border-radius:6px 10px;
@@ -372,8 +377,8 @@ height:50%;
 .right-bar:after {
   content: "";
   background-color: white;
-  width: 40px;
-  height: 5px;
+  width: 2vw;
+  height: 0.26vw;
   display: block;
   float: right;
   border-radius:6px 10px;
@@ -391,7 +396,7 @@ height:50%;
 .forecast-by-time-box{
 width:100%;
   color:white;
-  position:relative;
+  position:absolute;
   top:35%;
 }
 .time-for-temps{
@@ -412,6 +417,7 @@ width:100%;
   display:none;
 }
 .opened-card{
-  height:23rem;
+  height:25em;
   transition: all 0.5s;
+
 }
