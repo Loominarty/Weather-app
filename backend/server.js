@@ -7,7 +7,7 @@ var api=process.env.API_KEY;
 var url="http://api.openweathermap.org/data/2.5/weather?q="
 var url_2="http://api.openweathermap.org/data/2.5/forecast?q="
 var exclude="&exclude=current,minutely,hourly,alerts"
-const port_1=process.env.PORT1 || 8080;
+const port_1=process.env.PORT || 8080;
 var units="&units=metric"
 var upload = multer();
 var request = require('request');
