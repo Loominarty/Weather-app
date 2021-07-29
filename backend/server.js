@@ -28,7 +28,7 @@ app.post('/city', upload.none(), (req, res) => {
   })
 app.post('/weather', (req,res) =>{
 let city=req.app.locals.newCity;
-current_url=url+city+exclude+api+units;
+current_url=url+city+exclude+"&appid="+api+units;
 
 request(current_url, (error, response, body) =>{
 body= JSON.parse(body);
@@ -61,7 +61,7 @@ app.post('/forecast/:name', (req,res) => {
 let city=req.app.locals.selected_city;
 city=city.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
 console.log(city);
-forecast_url=url_2+city+exclude+api+units;
+forecast_url=url_2+city+exclude+"&appid="+api+units;
 
 request(forecast_url, (error, response, body) =>{
   body= JSON.parse(body);
