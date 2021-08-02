@@ -8,15 +8,15 @@ var url="http://api.openweathermap.org/data/2.5/weather?q="
 var url_2="http://api.openweathermap.org/data/2.5/forecast?q="
 var exclude="&exclude=current,minutely,hourly,alerts"
 const port_1=process.env.PORT || 8080;
-var units="&units=metric"
+console.log(port_1);
+var units="&units=metric";
 var upload = multer();
 var request = require('request');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(
-  cors({
-  })
+  cors()
 );
 
 app.post('/city', upload.none(), (req, res) => {
@@ -44,7 +44,7 @@ app.post('/forecast/selected_city', (req,res)=>{
 app.locals.selected_city=req.body.name;
 //console.log(app.locals.selected_city)
 
-res.send(app.locals.selected_city)
+res.send(app.locals.selected_city);
 
 
 
@@ -57,7 +57,7 @@ app.post('/forecast/:name', (req,res) => {
 
 let city=req.app.locals.selected_city;
 city=city.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-console.log(city);
+//console.log(city);
 forecast_url=url_2+city+exclude+"&appid="+api+units;
 
 request(forecast_url, (error, response, body) =>{
@@ -76,4 +76,4 @@ request(forecast_url, (error, response, body) =>{
 
 })
 
-app.listen(port_1)
+app.listen(port_1);

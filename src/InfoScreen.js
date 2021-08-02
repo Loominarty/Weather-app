@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import {useEffect, useState} from 'react'
-import axios from 'axios'
+import {useEffect, useState} from 'react';
+import axios from 'axios';
 const InfoScreen = React.memo((props) =>{
 const { name } = useParams();
 const [Forecast,setForecast] = useState([]);
@@ -28,8 +28,7 @@ const toggleClass = (e,index) =>{
       forecast_class[index].classList.add('closed-card');
       
    }
-  // e.classList.toggle('open')
- // console.log(e.currentTarget.className);
+  
    
    
 }
@@ -38,7 +37,6 @@ axios.post("http://localhost:8080/forecast/selected_city",{name: name})
 .then(response =>{
    if(response.status===200){
       setCityResponse(response.data);
-//console.log(response)
    }
    
  }) 
@@ -64,12 +62,10 @@ console.log(Forecast)
  
     }
 
-//console.log(date);
   
  },[CityResponse])
 useEffect(()=>{
-   if(Forecast.length!==0){
-    // getUniqueDates(Forecast); 
+   if(Forecast.length!==0){ 
      getAverageTemp(Forecast);
    }
 console.log(Forecast)
