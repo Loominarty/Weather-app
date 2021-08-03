@@ -33,7 +33,7 @@ const toggleClass = (e,index) =>{
    
 }
 useEffect(() =>{
-axios.post("http://localhost:8080/forecast/selected_city",{name: name})
+axios.post("/forecast/selected_city",{name: name})
 .then(response =>{
    if(response.status===200){
       setCityResponse(response.data);
@@ -50,7 +50,7 @@ axios.post("http://localhost:8080/forecast/selected_city",{name: name})
     if(CityResponse!==null){
    axios.post({
    method: 'post',
-   url: 'http://localhost:8080/forecast/:name'
+   url: '/forecast/:name'
  })
  .then(res=>{
     

@@ -29,20 +29,15 @@ const removecity = (CityToRemove) =>{
   setCity(cityList.filter((t)=>t[0][0].index!==CityToRemove))
   for(let i=CityToRemove;i<=cityList.length-1;i++){
     cityList[i][0][0].index=cityList[i][0][0].index-1
-    //ForecastList[i][0][0]=ForecastList[i][0][0]-1
+    
   }
-  /*
-  setCity(ForecastList.filter((t)=>t[0]!==CityToRemove))
-  for(let i=CityToRemove;i<=ForecastList.length-1;i++){
-    ForecastList[i][0]=ForecastList[i][0]-1
-  }
-*/
+  
 }
 
 useEffect(() => {
 
     setCity(prevCity =>[...prevCity, [newCity]])
-    //setForecastList(prevForecast =>[...prevForecast, [newForecast]])
+    
     
     console.log(cityList)
 }, [props]);
@@ -78,7 +73,7 @@ return (
 
 </div>
 
-{/*</Link> */}
+
 
  </CSSTransition>
 ))
