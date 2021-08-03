@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const path=require('path');
 var multer = require('multer');
 var api=process.env.API_KEY;
 var url="http://api.openweathermap.org/data/2.5/weather?q="
@@ -15,10 +16,8 @@ var request = require('request');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(
-  cors()
-);
-
+app.use(cors());
+app.use(express.static(path.resolve(__dirname, '../build')));
 app.post('/city', upload.none(), (req, res) => {
     app.locals.newCity=req.body.cityInput;
     res.send(app.locals.newCity);
@@ -75,5 +74,7 @@ request(forecast_url, (error, response, body) =>{
 
 
 })
-
+app.post('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
+});
 app.listen(port_1);
