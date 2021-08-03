@@ -7,6 +7,7 @@ var multer = require('multer');
 if(process.env.NODE_ENV==='production'){
   app.use(express.static('build'));
 }
+app.use(express.static(path.resolve(__dirname, '/build')));
 var api=process.env.API_KEY;
 var url="http://api.openweathermap.org/data/2.5/weather?q="
 var url_2="http://api.openweathermap.org/data/2.5/forecast?q="
@@ -20,7 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(cors());
-app.use(express.static(path.resolve(__dirname, '/build')));
+
 app.post('/city', upload.none(), (req, res) => {
     app.locals.newCity=req.body.cityInput;
     res.send(app.locals.newCity);
@@ -77,7 +78,7 @@ request(forecast_url, (error, response, body) =>{
 
 
 })
-app.post('*', (req, res) => {
+app.post('/*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
 });
 app.listen(port_1);
