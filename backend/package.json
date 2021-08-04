@@ -15,7 +15,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=production node server.js",
-    "build": "npm install && npm run build"
+    "build": "npm install && npm run build",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "engines": {
     "node": "15.9.0"

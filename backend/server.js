@@ -17,10 +17,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'build')))
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'))
-})
+if (process.env.NODE_ENV) { 
+  app.use(express.static('client/build')); 
+   app.get('*', (req, res) => { 
+     res.sendFile(path.resolve(__dirname, 'build', 'index.html')); 
+  }); 
+
+
+}
 app.post('/city', upload.none(), (req, res) => {
     app.locals.newCity=req.body.cityInput;
     res.send(app.locals.newCity);
