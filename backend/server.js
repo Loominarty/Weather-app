@@ -17,6 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(cors());
+/*
 if (process.env.NODE_ENV) { 
   app.use(express.static('client/build')); 
    app.get('*', (req, res) => { 
@@ -25,6 +26,7 @@ if (process.env.NODE_ENV) {
 
 
 }
+*/
 app.post('/city', upload.none(), (req, res) => {
     app.locals.newCity=req.body.cityInput;
     res.send(app.locals.newCity);
