@@ -17,7 +17,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "publishToHeroku":"cd ../ && git subtree push --prefix backend heroku-app-backend main || true",
     "start": "node server.js",
-    "build": "npm install && npm run build"
+    "build": "cd .. && cd client && npm install && npm run build"
   },
   "engines": {
     "node": "15.9.0"
