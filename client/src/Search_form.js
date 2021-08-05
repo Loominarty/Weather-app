@@ -19,7 +19,7 @@ const SearchForm = ({sendDataToParent}) => {
     data.set('cityInput', data.get('cityInput'));
     
     
-    axios.post("/city",data)
+    axios.post("https://weather-app-expressjs-server.herokuapp.com/city",data)
     .then(response =>{
       if(response.status===200){
 
@@ -34,7 +34,7 @@ const SearchForm = ({sendDataToParent}) => {
   
 axios({
 method: 'post',
-url: '/weather'
+url: 'https://weather-app-expressjs-server.herokuapp.com/weather'
     })
     .then(response =>{
 if(response.data.cod===200){
