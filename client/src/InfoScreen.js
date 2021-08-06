@@ -48,7 +48,6 @@ console.log(name);
 
  useEffect(() =>{
     if(CityResponse!==null){
-       name=JSON.stringify(name);
    axios.post({
    method: 'post',
    url: `https://weather-app-expressjs-server.herokuapp.com/forecast/${name}`
