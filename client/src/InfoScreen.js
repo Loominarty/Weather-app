@@ -41,7 +41,7 @@ axios.post("https://weather-app-expressjs-server.herokuapp.com/forecast/selected
    
  }) 
 
-console.log(name);
+//console.log(name);
 },[name])
 
 
