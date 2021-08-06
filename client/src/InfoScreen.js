@@ -41,12 +41,13 @@ axios.post("https://weather-app-expressjs-server.herokuapp.com/forecast/selected
    
  }) 
 
-//console.log(name);
+
 },[name])
 
 
 
  useEffect(() =>{
+    //console.log(name);
     if(CityResponse!==null){
    axios.post({
    method: 'post',
