@@ -50,7 +50,7 @@ console.log(body);
 })
 app.post('/forecast/selected_city', (req,res)=>{
 app.locals.selected_city=req.body.name;
-console.log(app.locals.selected_city)
+//console.log(app.locals.selected_city)
 
 res.send(app.locals.selected_city);
 
