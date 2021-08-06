@@ -41,7 +41,7 @@ axios.post("https://weather-app-expressjs-server.herokuapp.com/forecast/selected
    
  }) 
 
-
+console.log(name);
 },[name])
 
 
@@ -50,7 +50,7 @@ axios.post("https://weather-app-expressjs-server.herokuapp.com/forecast/selected
     if(CityResponse!==null){
    axios.post({
    method: 'post',
-   url: "https://weather-app-expressjs-server.herokuapp.com/forecast/:name"
+   url: 'https://weather-app-expressjs-server.herokuapp.com/forecast/:name'
  })
  .then(res=>{
     
