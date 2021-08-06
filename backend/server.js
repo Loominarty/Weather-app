@@ -15,7 +15,6 @@ var upload = multer();
 var request = require('request');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
 app.use(cors());
 /*
 if (process.env.NODE_ENV) { 
