@@ -26,9 +26,12 @@
     "publishToHeroku":"cd ../ && git subtree push --prefix client heroku main || true",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "webpack --mode production",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "engines": {
+    "node": "15.9.0"
   },
   "eslintConfig": {
     "extends": [
