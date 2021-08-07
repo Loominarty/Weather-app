@@ -8,25 +8,21 @@ var api=process.env.API_KEY;
 var url="http://api.openweathermap.org/data/2.5/weather?q="
 var url_2="http://api.openweathermap.org/data/2.5/forecast?q="
 var exclude="&exclude=current,minutely,hourly,alerts"
-const port_1=process.env.PORT || 8080;
-console.log(port_1);
+const port=process.env.PORT || 8080;
+console.log(port);
 var units="&units=metric";
 var upload = multer();
 var request = require('request');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
-if (process.env.NODE_ENV === 'production') {
-	app.use(express.static('../client/build'));
-}
+
 app.post('/city', upload.none(), (req, res) => {
     app.locals.newCity=req.body.cityInput;
     res.send(app.locals.newCity);
     //console.log(app.locals.newCity);
   })
-  app.get('*', (request, response) => {
-    response.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-  });
+  
 app.post('/weather', (req,res) =>{
 let city=req.app.locals.newCity;
 current_url=url+city+exclude+"&appid="+api+units;
@@ -77,20 +73,18 @@ request(forecast_url, (error, response, body) =>{
   })
 
 
-
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static('../client/build'));
+}
+app.get('*', (request, response) => {
+    response.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+  });
 
 })
 
-//app.use(express.static(path.join(__dirname, '../client/build')))
-
-/*
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '../client/build/index.html'))
-})
-*/
 
 
 
 
 
-app.listen(port_1);
+app.listen(port);
