@@ -3,6 +3,7 @@
   "name": "weatherapp",
   "version": "0.1.0",
   "private": true,
+  "proxy":"https://weather-app-expressjs-server.herokuapp.com",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
