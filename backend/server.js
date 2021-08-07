@@ -25,7 +25,7 @@ app.post('/city', upload.none(), (req, res) => {
     //console.log(app.locals.newCity);
   })
   app.get('*', (request, response) => {
-    response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+    response.sendFile(path.join(__dirname, '../client/build', 'index.html'));
   });
 app.post('/weather', (req,res) =>{
 let city=req.app.locals.newCity;
