@@ -16,21 +16,17 @@ var request = require('request');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
-/*
-if (process.env.NODE_ENV) { 
-  app.use(express.static('client/build')); 
-   app.get('*', (req, res) => { 
-     res.sendFile(path.resolve(__dirname, 'build', 'index.html')); 
-  }); 
-
-
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static('../client/build'));
 }
-*/
 app.post('/city', upload.none(), (req, res) => {
     app.locals.newCity=req.body.cityInput;
     res.send(app.locals.newCity);
     //console.log(app.locals.newCity);
   })
+  app.get('*', (request, response) => {
+    response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
 app.post('/weather', (req,res) =>{
 let city=req.app.locals.newCity;
 current_url=url+city+exclude+"&appid="+api+units;
