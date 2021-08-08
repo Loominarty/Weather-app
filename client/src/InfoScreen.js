@@ -51,7 +51,7 @@ axios.post("https://weather-app-expressjs-server.herokuapp.com/forecast/selected
     if(CityResponse!==null){
    axios({
    method: 'post',
-   url: "https://weather-app-expressjs-server.herokuapp.com/forecast/Kretinga"
+   url: "https://weather-app-expressjs-server.herokuapp.com/forecast/:name"
  })
  .then(res=>{
     
