@@ -1,6 +1,4 @@
 import React from 'react';
-//import ReactDOM from 'react-dom';
-//import {useState} from 'react';
 import axios from 'axios';
 const SearchForm = ({sendDataToParent}) => {
   
