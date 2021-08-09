@@ -1,7 +1,7 @@
 import React from 'react';
 import SideBar from './SideBar';
 import Home from './Home';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, HashRouter} from 'react-router-dom';
 import InfoScreen from './InfoScreen'
 function App() {
   
@@ -11,7 +11,7 @@ function App() {
     
       
     
-    <Router>
+    <HashRouter basename="/">
       
     <div className="App">
     
@@ -26,7 +26,7 @@ function App() {
    <Route exact path="/">
 <Home/>
    </Route>
-   <Route exact path="/forecast/:name">
+   <Route path="/forecast/:name">
      <InfoScreen/>
    </Route>
  </Switch>
@@ -38,7 +38,7 @@ function App() {
       
        
     </div>
-    </Router>
+    </HashRouter>
    
   );
 }
