@@ -33,7 +33,7 @@ const toggleClass = (e,index) =>{
    
 }
 useEffect(() =>{
-axios.post("https://weather-app-expressjs-server.herokuapp.com/forecast/selected_city",{name:name})
+axios.post("http://localhost:8080/forecast/selected_city",{name:name})
 .then(response =>{
    if(response.status===200){
       setCityResponse(response.data);
@@ -45,13 +45,12 @@ axios.post("https://weather-app-expressjs-server.herokuapp.com/forecast/selected
 },[name])
 
 
-
  useEffect(() =>{
     console.log(name);
     if(CityResponse!==null){
    axios({
    method: 'post',
-   url: "https://weather-app-expressjs-server.herokuapp.com/forecast/:name"
+   url: "http://localhost:8080/forecast/:name"
  })
  .then(res=>{
     
@@ -110,10 +109,10 @@ return (
     
 <h2 className="current-city-name">{name}</h2>
 <p className="current-date">{date}</p>
-<p className="current-city-temp">{Math.round(location.state.current_temp)}&#176;C</p>
-<p className="current-city-wind"><span className="wind-label">Vėjo greitis</span><br/>{Math.round(location.state.current_wind)} m/s</p>
-<p className="current-city-pressure"><span className="pressure-label">Slėgis</span><br/>{location.state.current_pressure} mbar</p>
-<p className="current-city-humidity"><span className="humidity-label">Drėgmė</span><br/>{location.state.current_humidity}%</p>
+<p className="current-city-temp">{Math.round(localStorage.getItem('current_temp'))}&#176;C</p>
+<p className="current-city-wind"><span className="wind-label">Vėjo greitis</span><br/>{Math.round(localStorage.getItem('current_wind'))} m/s</p>
+<p className="current-city-pressure"><span className="pressure-label">Slėgis</span><br/>{localStorage.getItem('current_pressure')} mbar</p>
+<p className="current-city-humidity"><span className="humidity-label">Drėgmė</span><br/>{localStorage.getItem('current_humidity')}%</p>
    </div>
    <div className="forecast-data">
 {
