@@ -41,7 +41,16 @@ useEffect(() => {
     
     console.log(cityList)
 }, [props]);
+useEffect(() =>{
+  localStorage.clear();
+cityList.map((item)=>{
+localStorage.setItem('current_temp',item[0][0].temp)
+localStorage.setItem('current_wind',item[0][0].wind)
+localStorage.setItem('current_pressure',item[0][0].pressure)
+localStorage.setItem('current_humidity',item[0][0].humidity)
+})
 
+},[cityList])
 
  
 
@@ -57,13 +66,13 @@ return (
          <CSSTransition classNames="card" key={item[0][0].index} timeout={500}>
            
           <div className="city-card" id="city-card" key={item[0][0].index }>
-<Link to={{pathname:`/forecast/${item[0][0].name}`, state:{current_temp: item[0][0].temp, current_wind:item[0][0].wind, current_pressure: item[0][0].pressure, current_humidity:item[0][0].humidity}}}>            
+<Link className="link-to-info" to={{pathname:`/forecast/${item[0][0].name}` , state:{current_temp: item[0][0].temp, current_wind:item[0][0].wind, current_pressure: item[0][0].pressure, current_humidity:item[0][0].humidity}}}>            
 <p className="city-id">{item[0][0].index}</p>
-<p className="city-name">Miestas: {item[0][0].name}</p>
-<p className="city-temperature">Temperatūra: {item[0][0].temp}&#176;C</p>
-<p className="city-wind">Vėjo greitis: {item[0][0].wind}m/s</p>
-<p className="city-pressure">Slėgis: {item[0][0].pressure}mbar</p>
-<p className="city-humidity">Drėgnumas: {item[0][0].humidity}%</p>
+<p className="city-name">{item[0][0].name}</p>
+<p className="city-temperature">Temperatūra:<br/> {item[0][0].temp}&#176;C</p>
+<p className="city-wind">Vėjo greitis:<br/> {item[0][0].wind}m/s</p>
+<p className="city-pressure">Slėgis:<br/> {item[0][0].pressure}mbar</p>
+<p className="city-humidity">Drėgnumas:<br/> {item[0][0].humidity}%</p>
 </Link>
 
 <button className="remove-button" onClick={() => {removecity(item[0][0].index);push("/")}
