@@ -16,7 +16,6 @@ var request = require('request');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
-
 app.post('/city', upload.none(), (req, res) => {
     app.locals.newCity=req.body.cityInput;
     res.send(app.locals.newCity);
@@ -77,12 +76,6 @@ request(forecast_url, (error, response, body) =>{
 
 })
 
-app.use(express.static(path.join(__dirname, 'build')));
-app.get('/', function (req, res) {
-  app.get('/*', function (req, res) {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-  });
-});
 
 
 
