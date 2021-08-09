@@ -21,7 +21,7 @@
     "publishToHeroku": "cd ../ && git subtree push --prefix client heroku main || true",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
-    "build": "webpack --mode production",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
