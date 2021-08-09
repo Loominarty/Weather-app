@@ -66,7 +66,7 @@ return (
          <CSSTransition classNames="card" key={item[0][0].index} timeout={500}>
            
           <div className="city-card" id="city-card" key={item[0][0].index }>
-<Link className="link-to-info" to={{pathname:`/forecast/${item[0][0].name}` , state:{current_temp: item[0][0].temp, current_wind:item[0][0].wind, current_pressure: item[0][0].pressure, current_humidity:item[0][0].humidity}}}>            
+<Link className="link-to-info" to={{pathname:`/forecast/${item[0][0].name}`}}>            
 <p className="city-id">{item[0][0].index}</p>
 <p className="city-name">{item[0][0].name}</p>
 <p className="city-temperature">Temperatūra:<br/> {item[0][0].temp}&#176;C</p>
