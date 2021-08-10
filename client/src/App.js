@@ -26,7 +26,7 @@ function App() {
    <Route exact path="/">
 <Home/>
    </Route>
-   <Route path="/forecast/:name">
+   <Route exact path="/forecast/:name">
      <InfoScreen/>
    </Route>
  </Switch>
