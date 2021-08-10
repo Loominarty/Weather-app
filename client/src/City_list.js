@@ -7,12 +7,7 @@ const CityList = React.memo( (props) =>{
 const [cityList,setCity]=useState([]);
 const { push } = useHistory();
 
-/*
-const newForecast = [
-  cityList.length+1,
-  props.forecast[0].list
-]
-*/
+
   const newCity = [
     {
       index:cityList.length+1,
@@ -36,9 +31,8 @@ const removecity = (CityToRemove) =>{
 
 useEffect(() => {
 
-    setCity(prevCity =>[...prevCity, [newCity]])
-    
-    
+  setCity(prevCity =>[...prevCity, [newCity]]) 
+
     console.log(cityList)
 }, [props]);
 useEffect(() =>{
@@ -64,21 +58,27 @@ return (
         cityList.map((item) =>(
           
          <CSSTransition classNames="card" key={item[0][0].index} timeout={500}>
-           
-          <div className="city-card" id="city-card" key={item[0][0].index }>
-<Link className="link-to-info" to={{pathname:`/forecast/${item[0][0].name}`}}>            
+          
+          <div className="city-card" id="city-card" key={item[0][0].index } >
+            
+            <button className="remove-button" onClick={() => {removecity(item[0][0].index);push("/")}
+}><i className="fas fa-times"></i>
+<Link to="/"></Link>
+</button>     
+            <span className="city-card-info" onClick={() => push(`/forecast/${item[0][0].name}`)}>   
+        
+ 
+<p className="city-name">{item[0][0].name}</p>     
 <p className="city-id">{item[0][0].index}</p>
-<p className="city-name">{item[0][0].name}</p>
+
 <p className="city-temperature">Temperatūra:<br/> {item[0][0].temp}&#176;C</p>
 <p className="city-wind">Vėjo greitis:<br/> {item[0][0].wind}m/s</p>
 <p className="city-pressure">Slėgis:<br/> {item[0][0].pressure}mbar</p>
 <p className="city-humidity">Drėgnumas:<br/> {item[0][0].humidity}%</p>
-</Link>
 
-<button className="remove-button" onClick={() => {removecity(item[0][0].index);push("/")}
-}><i className="fas fa-times"></i>
-<Link to="/"></Link>
-</button>
+
+</span> 
+
 
 </div>
 
