@@ -73,7 +73,7 @@ return (
   <p className="city-temperature">{item[0][0].temp}&#176;C</p>   
 
 
-<div className="inline-city-information">
+<div className="inline-city-information" id="inline-city-information">
 
 <p className="city-wind">Vėjas<br/> {item[0][0].wind}m/s</p>
 <p className="city-pressure">Slėgis<br/> {item[0][0].pressure}mbar</p>
