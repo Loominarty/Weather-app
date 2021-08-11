@@ -8,12 +8,12 @@ const SideBar = () => {
   const ToggleClass = () =>{
     setActive(!isActive);
     setShown(!isShown);
-    if(!isActive){
-      document.getElementById("navbar").style.left = "0%";
+    if(isActive){
+      document.getElementById("sidebar").classList.add('sidebar-opened');
     
       
     }else{
-      document.getElementById("navbar").style.left = "-19rem";
+      document.getElementById("sidebar").classList.remove('sidebar-opened');
      
     }
   };
@@ -21,14 +21,14 @@ const SideBar = () => {
   
  
 return (
-<nav className="navbar" id="navbar">
-   <div className={isActive ? "hamburger-container change" : "hamburger-container"} id="hamburger" onClick={ToggleClass}>
+<nav className="sidebar" id="sidebar">
+   <div className={isActive ? "hamburger-container" : "hamburger-container change"} id="hamburger" onClick={ToggleClass}>
    <div className="bar1"></div>
   <div className="bar2"></div>
   <div className="bar3"></div>
    </div>
    
-<div className={isShown ? "nav-elements " : "nav-elements hide"} id="nav-elements" >
+<div className={isShown ? "sidebar-elements hide" : "sidebar-elements"} id="sidebar-elements" >
 <SearchForm sendDataToParent={setCity}/>
 
 
