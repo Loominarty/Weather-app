@@ -58,26 +58,30 @@ return (
         cityList.map((item) =>(
           
          <CSSTransition classNames="card" key={item[0][0].index} timeout={500}>
+           
+           
           
           <div className="city-card" id="city-card" key={item[0][0].index } >
-            
             <button className="remove-button" onClick={() => {removecity(item[0][0].index);push("/")}
 }><i className="fas fa-times"></i>
 <Link to="/"></Link>
 </button>     
-            <span className="city-card-info" onClick={() => push(`/forecast/${item[0][0].name}`)}>   
+     <p className="city-name">{item[0][0].name}</p>       
+              
         
- 
-<p className="city-name">{item[0][0].name}</p>     
-<p className="city-id">{item[0][0].index}</p>
-
-<p className="city-temperature">Temperatūra:<br/> {item[0][0].temp}&#176;C</p>
-<p className="city-wind">Vėjo greitis:<br/> {item[0][0].wind}m/s</p>
-<p className="city-pressure">Slėgis:<br/> {item[0][0].pressure}mbar</p>
-<p className="city-humidity">Drėgnumas:<br/> {item[0][0].humidity}%</p>
+ <span className="city-card-info" onClick={() => push(`/forecast/${item[0][0].name}`)}>
+  <p className="city-temperature">{item[0][0].temp}&#176;C</p>   
 
 
+<div className="inline-city-information">
+
+<p className="city-wind">Vėjas<br/> {item[0][0].wind}m/s</p>
+<p className="city-pressure">Slėgis<br/> {item[0][0].pressure}mbar</p>
+<p className="city-humidity">Drėgmė<br/> {item[0][0].humidity}%</p>
+</div>
 </span> 
+
+
 
 
 </div>
