@@ -6,16 +6,19 @@ const SideBar = () => {
   const [isActive, setActive]= useState("false");
   const[isShown, setShown]=useState("false");
   const ToggleClass = () =>{
+    let sidebar=document.getElementById("sidebar");
+    let city_info=document.getElementById('inline-city-information');
     setActive(!isActive);
     setShown(!isShown);
     if(isActive){
-      document.getElementById("sidebar").classList.add('sidebar-opened');
-    
+      sidebar.classList.add('sidebar-opened');
+      
       
     }else{
-      document.getElementById("sidebar").classList.remove('sidebar-opened');
-     
+      sidebar.classList.remove('sidebar-opened');
     }
+    
+
   };
   
   
