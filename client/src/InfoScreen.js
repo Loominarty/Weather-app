@@ -7,8 +7,6 @@ const { name } = useParams();
 const [Forecast,setForecast] = useState([]);
 const [CityResponse, setCityResponse]=useState(null);
 const [AverageTemp, setAverageTemp]=useState([])
-
-const location=useLocation();
 var date= new Date().toLocaleDateString('lt');
 const toggleClass = (e,index) =>{
    let arrow_class = document.getElementsByClassName('arrow-icon');
@@ -126,7 +124,7 @@ return (
    
     
        
-      <div className="forecast-card closed-card" key={i}>
+      <div className="forecast-card closed-card" key={i} style={{animationDelay: `${i*1.5}s`}}>
          
        
          <div className="forecast-info">
