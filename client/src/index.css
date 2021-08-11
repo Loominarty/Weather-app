@@ -19,7 +19,7 @@
     filter: blur(2px);
 }
 
-.navbar{
+.sidebar{
 
   display:flex;
   flex-direction:column;
@@ -28,7 +28,7 @@
   position: fixed; 
   z-index: 1; 
   top: 0; 
-  left: 0;
+  left: -19rem;
   background-color: rgba(255, 255, 255, 0.2);
   overflow-x: hidden; 
   padding-top: 60px; 
@@ -36,10 +36,14 @@
   -ms-overflow-style: none; 
   scrollbar-width: none; 
 }
-.navbar::-webkit-scrollbar{
+.sidebar-opened{
+left:0%;
+}
+
+.sidebar::-webkit-scrollbar{
   display:none;
 }
-.navbar .links{
+.sidebar .links{
   margin-left:auto;
   margin-right:auto;
   font-family: 'Roboto', sans-serif;
@@ -47,7 +51,7 @@
   
 }
 
-.navbar a{
+.sidebar a{
   text-decoration:none;
   
 }
@@ -181,9 +185,11 @@ top:1%;
 }
 .remove-button{
   position:relative;
-  left:96%;
-  
+  left:95%;
+  top:0;
+  width:5%;
   padding:0;
+ 
   background:transparent;
   color:white;
   border:0px;
@@ -210,29 +216,42 @@ top:1%;
 .city-name{
   font-size:19px;
   position:relative;
-  top:0;
-  left:160%;
-  margin-top:-15px;
+  width:40%;
+  top:-17px;
+  left:40%;
+  
   
 }
 
-.city-temperature,.city-pressure,.city-wind,.city-humidity{
+.city-pressure,.city-wind,.city-humidity{
  width:30%;
  margin:0;
+ text-align:center;
  
 }
-.city-id{
-  font-size:25px;
-  position:relative;
-  top:80%;
-  left:80%;
-}
-.city-card-info{
-  
-  display:table;
-  
+.city-temperature{
+  text-align:center;
+  font-size:20px;
 }
 
+.city-id{
+ position:relative; 
+  font-size:20px;
+  width:5%;
+  left:96%;
+  
+}
+.city-card-info{
+  display:block;
+  
+}
+.inline-city-information{
+  display:inline-flex;
+  width:100%;
+  justify-content:space-evenly;
+  margin-top:15px;
+  
+}
 .Info-screen{
   font-family: 'Roboto', sans-serif;
   display:flex;
@@ -314,6 +333,14 @@ border-radius: 5px;
   flex-wrap: wrap;
  
 }
+@keyframes appear{
+0% {
+  opacity:0;
+}
+100% {
+opacity:100;
+}
+}
 .forecast-card{
   background: rgba(255, 255, 255, 0.2);
   margin-left:0.26vw;
@@ -322,7 +349,6 @@ border-radius: 5px;
   margin-top:10px;
   position:relative;
  border-radius:5px;
-  
   top:10%;
   width:13rem;
   height:10vw;
@@ -348,10 +374,8 @@ position:relative;
 margin-top:1vw;
   font-size:3vmin;
   text-align:center;
- 
- 
- 
 }
+
 .arrow-icon {
   height:2.8vw;
   width:2.8vw;
