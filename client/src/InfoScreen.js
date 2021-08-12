@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
 const InfoScreen = React.memo((props) =>{
@@ -31,7 +31,7 @@ const toggleClass = (e,index) =>{
    
 }
 useEffect(() =>{
-axios.post("http://localhost:8080/forecast/selected_city",{name:name})
+axios.post("https://weather-app-expressjs-server.herokuapp.com/selected_city",{name:name})
 .then(response =>{
    if(response.status===200){
       setCityResponse(response.data);
@@ -48,7 +48,7 @@ axios.post("http://localhost:8080/forecast/selected_city",{name:name})
     if(CityResponse!==null){
    axios({
    method: 'post',
-   url: "http://localhost:8080/forecast/:name"
+   url: "https://weather-app-expressjs-server.herokuapp.com/forecast/:name"
  })
  .then(res=>{
     
