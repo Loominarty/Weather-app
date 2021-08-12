@@ -7,7 +7,7 @@ const SideBar = () => {
   const[isShown, setShown]=useState("false");
   const ToggleClass = () =>{
     let sidebar=document.getElementById("sidebar");
-    let city_info=document.getElementById('inline-city-information');
+    let city_cards=document.getElementsByClassName('city-list');
     setActive(!isActive);
     setShown(!isShown);
     if(isActive){
@@ -16,6 +16,14 @@ const SideBar = () => {
       
     }else{
       sidebar.classList.remove('sidebar-opened');
+      
+    }
+    console.log(city_cards)
+    if(city_cards.length>0 && sidebar.classList.contains('sidebar-opened')){
+      city_cards[0].style.display = "block";
+    }
+    if(city_cards.length>0 && sidebar.classList.contains('sidebar-opened')===false){
+      city_cards[0].style.display = "none";
     }
     
 
