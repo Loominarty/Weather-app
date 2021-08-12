@@ -31,7 +31,7 @@ const toggleClass = (e,index) =>{
    
 }
 useEffect(() =>{
-axios.post("https://weather-app-expressjs-server.herokuapp.com/selected_city",{name:name})
+axios.post("https://weather-app-expressjs-server.herokuapp.com/forecast/selected_city",{name:name})
 .then(response =>{
    if(response.status===200){
       setCityResponse(response.data);
