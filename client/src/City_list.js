@@ -35,16 +35,7 @@ useEffect(() => {
 
     console.log(cityList)
 }, [props]);
-useEffect(() =>{
-  localStorage.clear();
-cityList.map((item)=>{
-localStorage.setItem('current_temp',item[0][0].temp)
-localStorage.setItem('current_wind',item[0][0].wind)
-localStorage.setItem('current_pressure',item[0][0].pressure)
-localStorage.setItem('current_humidity',item[0][0].humidity)
-})
 
-},[cityList])
 
  
 
@@ -69,7 +60,14 @@ return (
      <p className="city-name">{item[0][0].name}</p>       
               
         
- <span className="city-card-info" onClick={() => push(`/forecast/${item[0][0].name}`)}>
+ <span className="city-card-info" onClick={() => {
+   push(`/forecast/${item[0][0].name}`);
+   localStorage.clear();
+   localStorage.setItem('current_temp',item[0][0].temp);
+localStorage.setItem('current_wind',item[0][0].wind);
+localStorage.setItem('current_pressure',item[0][0].pressure);
+localStorage.setItem('current_humidity',item[0][0].humidity);
+}}>
   <p className="city-temperature">{item[0][0].temp}&#176;C</p>   
 
 
