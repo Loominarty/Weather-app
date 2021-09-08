@@ -16,9 +16,10 @@ var request = require('request');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
-
-app.post('/weather', (req,res) =>{
-let city=req.body.cityInput;
+app.post('/weather',upload.none(), (req,res) =>{
+//console.log(req.body)
+  let city=req.body.cityInput;
+  city=city.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
 current_url=url+city+exclude+"&appid="+api+units;
 
 request(current_url, (error, response, body) =>{
@@ -30,31 +31,20 @@ if(error && response.statusCode != 200){
 else{
   res.send(body);
 }
-console.log(body);
+//console.log(body);
 })
-
-})
-app.post('/forecast/selected_city', (req,res)=>{
-app.locals.selected_city=req.body.name;
-//console.log(app.locals.selected_city)
-
-res.send(app.locals.selected_city);
-
-
-
-
-
 
 })
 
 app.post('/forecast/:name', (req,res) => {
-
-let city=req.app.locals.selected_city;
+//console.log(req.body)
+let city=req.body.name;
 city=city.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
 //console.log(city);
-forecast_url=url_2+city+exclude+"&appid="+api+units;
+forecast_url_1=url_2+city+exclude+"&appid="+api+units;
+forecast_url_2=url+city+exclude+"&appid="+api+units;
 
-request(forecast_url, (error, response, body) =>{
+request(forecast_url_1, (error, response, body) =>{
   body= JSON.parse(body);
   
   if(error && response.statusCode != 200){
