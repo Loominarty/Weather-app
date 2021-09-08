@@ -1,29 +1,23 @@
-import React from 'react';
+import React,{useState} from 'react';
 import axios from 'axios';
 const SearchForm = ({sendDataToParent}) => {
+  const [Form,setForm] = useState({
+    cityInput:""
+  });
   
-  
-
-
-
-
-
- 
-  const handleSubmit = (event) => {
-
-     event.preventDefault();
-    const data= new FormData(document.querySelector('#form'));
-    
-    data.set('cityInput', data.get('cityInput'));
-    
-  
-axios.post('http://localhost:8080/weather',data)
-    .then(response =>{
-if(response.data.cod===200){
-  sendDataToParent(response.data)
+const handleChange = (e) =>{
+  let cityInput=Form.cityInput;
+  cityInput = e.target.value;
+  setForm({cityInput});
 }
 
-
+  const handleSubmit = (e) => {
+     e.preventDefault();
+axios.post('http://localhost:8080/weather', Form)
+    .then(response =>{
+if(response.status===200){
+  sendDataToParent(response.data)
+}
     })
     .catch(error =>{
 console.log(error);
@@ -35,9 +29,9 @@ console.log(error);
   
     return (
         <div className="city_form_container">
-      <form method="post" action="/city" encType="multipart/form-data" onSubmit={handleSubmit} id="form">
+      <form method="post" action="/city" onSubmit={handleSubmit} id="form">
         <div className="material-texfield">
-      <input type='text' placeholder=" " className="city_input" name="cityInput" required/>
+      <input type='text' placeholder=" " className="city_input" onChange={(e) => handleChange(e)}  name="cityInput" value={Form.cityInput} required/>
       <label className="city_label">Įveskite miestą </label>
       </div>
       <button type="submit" className="submit_city"> <i className="fas fa-plus"></i><span> Pridėti miestą</span> </button>
