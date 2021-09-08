@@ -31,30 +31,30 @@ const toggleClass = (e,index) =>{
    
 }
 useEffect(() =>{
-axios.post("https://weather-app-expressjs-server.herokuapp.com/forecast/selected_city",{name:name})
-.then(response =>{
+console.log(name);
+ axios.post("http://localhost:8080/weather",{cityInput:name})
+.then(response=>{
+   console.log(response)
    if(response.status===200){
-      setCityResponse(response.data);
+      setCityResponse(response.data)
+      console.log(CityResponse)
    }
-   
- }) 
-
-
+})
+.catch(error =>{
+   console.log(error);
+       })
 },[name])
 
 
  useEffect(() =>{
-    console.log(name);
+    //console.log(name);
     if(CityResponse!==null){
-   axios({
-   method: 'post',
-   url: "https://weather-app-expressjs-server.herokuapp.com/forecast/:name"
- })
+   axios.post("http://localhost:8080/forecast/:name",{name:name})
  .then(res=>{
-    
+    console.log(res)
 setForecast(res.data)
 
-console.log(Forecast)
+//console.log(Forecast)
  })
 
  
@@ -62,11 +62,13 @@ console.log(Forecast)
 
   
  },[CityResponse])
+
+
 useEffect(()=>{
    if(Forecast.length!==0){ 
      getAverageTemp(Forecast);
    }
-console.log(Forecast)
+//console.log(Forecast)
 
 },[Forecast])
 
@@ -105,12 +107,12 @@ return (
    
    <div className="current-city-data">
     
-<h2 className="current-city-name">{name}</h2>
+<h2 className="current-city-name">{CityResponse.name}</h2>
 <p className="current-date">{date}</p>
-<p className="current-city-temp">{Math.round(localStorage.getItem('current_temp'))}&#176;C</p>
-<p className="current-city-wind"><span className="wind-label">Vėjo greitis</span><br/>{Math.round(localStorage.getItem('current_wind'))} m/s</p>
-<p className="current-city-pressure"><span className="pressure-label">Slėgis</span><br/>{localStorage.getItem('current_pressure')} mbar</p>
-<p className="current-city-humidity"><span className="humidity-label">Drėgmė</span><br/>{localStorage.getItem('current_humidity')}%</p>
+<p className="current-city-temp">{Math.round(CityResponse.main.temp)}&#176;C</p>
+<p className="current-city-wind"><span className="wind-label">Vėjo greitis</span><br/>{Math.round(CityResponse.wind.speed)} m/s</p>
+<p className="current-city-pressure"><span className="pressure-label">Slėgis</span><br/>{CityResponse.main.pressure} mbar</p>
+<p className="current-city-humidity"><span className="humidity-label">Drėgmė</span><br/>{CityResponse.main.humidity}%</p>
    </div>
    <div className="forecast-data">
 {
