@@ -33,7 +33,7 @@ useEffect(() => {
 
   setCity(prevCity =>[...prevCity, [newCity]]) 
 
-    console.log(cityList)
+    //console.log(cityList)
 }, [props]);
 
 
@@ -63,6 +63,7 @@ return (
  <span className="city-card-info" onClick={() => {
    push(`/forecast/${item[0][0].name}`);
    localStorage.clear();
+   localStorage.setItem('current_name',item[0][0].name);
    localStorage.setItem('current_temp',item[0][0].temp);
 localStorage.setItem('current_wind',item[0][0].wind);
 localStorage.setItem('current_pressure',item[0][0].pressure);
