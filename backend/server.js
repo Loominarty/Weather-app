@@ -16,14 +16,9 @@ var request = require('request');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
-app.post('/city', upload.none(), (req, res) => {
-    app.locals.newCity=req.body.cityInput;
-    res.send(app.locals.newCity);
-    //console.log(app.locals.newCity);
-  })
-  
+
 app.post('/weather', (req,res) =>{
-let city=req.app.locals.newCity;
+let city=req.body.cityInput;
 current_url=url+city+exclude+"&appid="+api+units;
 
 request(current_url, (error, response, body) =>{
