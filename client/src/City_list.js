@@ -3,38 +3,58 @@ import React from 'react';
 import {useState,useEffect} from 'react';
 import {CSSTransition,TransitionGroup,} from 'react-transition-group';
 import {Link, useHistory} from 'react-router-dom';
-const CityList = React.memo( (props) =>{
-const [cityList,setCity]=useState([]);
+const CityList = (props) =>{
 const { push } = useHistory();
-
-
-  const newCity = [
+const [retrieved_object,setObject]=useState([])
+const newCity = [
     {
-      index:cityList.length+1,
+      index:localStorage.getItem('cities') ? JSON.parse(localStorage.getItem('cities')).length : 0,
   name:props.city.name,
     temp:props.city.main.temp,
     wind:props.city.wind.speed,
     pressure:props.city.main.pressure,
     humidity:props.city.main.humidity
-    }
-    
-]
+    }]
 
-const removecity = (CityToRemove) =>{
-  setCity(cityList.filter((t)=>t[0][0].index!==CityToRemove))
-  for(let i=CityToRemove;i<=cityList.length-1;i++){
-    cityList[i][0][0].index=cityList[i][0][0].index-1
-    
-  }
+useEffect(() =>{
   
+ 
+console.log(localStorage.getItem('cities'))
+if(localStorage.getItem('cities')!==null){
+  setObject(JSON.parse(localStorage.getItem('cities')))
 }
 
-useEffect(() => {
+},[props])
+  
 
-  setCity(prevCity =>[...prevCity, [newCity]]) 
 
-    //console.log(cityList)
-}, [props]);
+
+useEffect(() =>{
+
+var old = localStorage.getItem('cities', JSON.stringify(newCity))
+//console.log(old)
+if(old===null){
+  
+  localStorage.setItem('cities', JSON.stringify(newCity))
+  setObject(JSON.parse(localStorage.getItem('cities')))
+}else{
+  old=JSON.parse(old);
+  localStorage.setItem('cities',JSON.stringify(old.concat(newCity)))
+  setObject(JSON.parse(localStorage.getItem('cities')))
+}
+
+console.log(JSON.parse(localStorage.getItem('cities')).length)
+
+//console.log(retrieved_object)
+},[props])
+
+const removecity = (CityToRemove) =>{
+  var arr = [];
+  arr = JSON.parse(localStorage.getItem('cities')).filter((t) => t.index !== CityToRemove)
+  console.log(arr);
+  localStorage.setItem('cities', JSON.stringify(arr))
+  setObject(JSON.parse(localStorage.getItem('cities')))
+}
 
 
  
@@ -44,39 +64,34 @@ return (
   <div className="city-list">
     <TransitionGroup  className="my-card">
 
-      {
+      {retrieved_object ?
          
-        cityList.map((item) =>(
+        retrieved_object.map((item) =>(
           
-         <CSSTransition classNames="card" key={item[0][0].index} timeout={500}>
+         <CSSTransition classNames="card" key={item.index} timeout={500}>
            
            
           
-          <div className="city-card" id="city-card" key={item[0][0].index } >
-            <button className="remove-button" onClick={() => {removecity(item[0][0].index);push("/")}
+          <div className="city-card" id="city-card" key={item.index} >
+            <button className="remove-button" onClick={() => {removecity(item.index);push("/")}
 }><i className="fas fa-times"></i>
 <Link to="/"></Link>
 </button>     
-     <p className="city-name">{item[0][0].name}</p>       
+     <p className="city-name">{item.name}</p>       
               
         
  <span className="city-card-info" onClick={() => {
-   push(`/forecast/${item[0][0].name}`);
-   localStorage.clear();
-   localStorage.setItem('current_name',item[0][0].name);
-   localStorage.setItem('current_temp',item[0][0].temp);
-localStorage.setItem('current_wind',item[0][0].wind);
-localStorage.setItem('current_pressure',item[0][0].pressure);
-localStorage.setItem('current_humidity',item[0][0].humidity);
+   push(`/forecast/${item.name}`);
+   
 }}>
-  <p className="city-temperature">{item[0][0].temp}&#176;C</p>   
+  <p className="city-temperature">{item.temp}&#176;C</p>   
 
 
 <div className="inline-city-information" id="inline-city-information">
 
-<p className="city-wind">Vėjas<br/> {item[0][0].wind}m/s</p>
-<p className="city-pressure">Slėgis<br/> {item[0][0].pressure}mbar</p>
-<p className="city-humidity">Drėgmė<br/> {item[0][0].humidity}%</p>
+<p className="city-wind">Vėjas<br/> {item.wind}m/s</p>
+<p className="city-pressure">Slėgis<br/> {item.pressure}mbar</p>
+<p className="city-humidity">Drėgmė<br/> {item.humidity}%</p>
 </div>
 </span> 
 
@@ -90,7 +105,7 @@ localStorage.setItem('current_humidity',item[0][0].humidity);
  </CSSTransition>
 ))
        
-      }
+      :''}
 
 
 
@@ -98,5 +113,5 @@ localStorage.setItem('current_humidity',item[0][0].humidity);
 
 </div>
 );
-})
+}
 export default CityList;
