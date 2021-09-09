@@ -85,7 +85,7 @@ for(var i=0;i<temps.length;i++){
    merged_array.push(`${dates[i]} ${temps[i]}`)
 }
 dates.forEach(function(x) {counts[x]=(counts[x] || 0)+1});
-console.log(counts);
+//console.log(counts);
 const splited_array=merged_array.map(x => x.split(" "))
 const average = splited_array.reduce((accumulator, currentValue) => {
 if(!accumulator[currentValue[0]]){
@@ -107,12 +107,12 @@ return (
    
    <div className="current-city-data">
     
-<h2 className="current-city-name">{CityResponse.name}</h2>
+<h2 className="current-city-name">{CityResponse ? CityResponse.name : ''}</h2>
 <p className="current-date">{date}</p>
-<p className="current-city-temp">{Math.round(CityResponse.main.temp)}&#176;C</p>
-<p className="current-city-wind"><span className="wind-label">Vėjo greitis</span><br/>{Math.round(CityResponse.wind.speed)} m/s</p>
-<p className="current-city-pressure"><span className="pressure-label">Slėgis</span><br/>{CityResponse.main.pressure} mbar</p>
-<p className="current-city-humidity"><span className="humidity-label">Drėgmė</span><br/>{CityResponse.main.humidity}%</p>
+<p className="current-city-temp">{CityResponse ? Math.round(CityResponse.main.temp) : ''}&#176;C</p>
+<p className="current-city-wind"><span className="wind-label">Vėjo greitis</span><br/>{CityResponse ? Math.round(CityResponse.wind.speed) : ''} m/s</p>
+<p className="current-city-pressure"><span className="pressure-label">Slėgis</span><br/>{CityResponse ? CityResponse.main.pressure : ''} mbar</p>
+<p className="current-city-humidity"><span className="humidity-label">Drėgmė</span><br/>{CityResponse ? CityResponse.main.humidity : ''}%</p>
    </div>
    <div className="forecast-data">
 {
