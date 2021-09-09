@@ -15,6 +15,7 @@ const handleChange = (e) =>{
      e.preventDefault();
 axios.post('http://localhost:8080/weather', Form)
     .then(response =>{
+      console.log(response)
 if(response.status===200){
   sendDataToParent(response.data)
 }
