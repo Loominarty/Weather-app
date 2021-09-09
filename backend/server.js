@@ -41,10 +41,10 @@ app.post('/forecast/:name', (req,res) => {
 let city=req.body.name;
 city=city.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
 //console.log(city);
-forecast_url_1=url_2+city+exclude+"&appid="+api+units;
-forecast_url_2=url+city+exclude+"&appid="+api+units;
+forecast_url=url_2+city+exclude+"&appid="+api+units;
 
-request(forecast_url_1, (error, response, body) =>{
+
+request(forecast_url, (error, response, body) =>{
   body= JSON.parse(body);
   
   if(error && response.statusCode != 200){
