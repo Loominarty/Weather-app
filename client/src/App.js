@@ -1,7 +1,7 @@
 import React from 'react';
 import SideBar from './SideBar';
 import Home from './Home';
-import {BrowserRouter as Router, Switch, Route, HashRouter} from 'react-router-dom';
+import {Switch, Route, HashRouter} from 'react-router-dom';
 import InfoScreen from './InfoScreen'
 function App() {
   
