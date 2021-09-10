@@ -1,60 +1,58 @@
-
 import React from 'react';
 import {useState,useEffect} from 'react';
 import {CSSTransition,TransitionGroup,} from 'react-transition-group';
 import {Link, useHistory} from 'react-router-dom';
-const CityList = (props) =>{
-const { push } = useHistory();
-const [retrieved_object,setObject]=useState([])
-const newCity = [
-    {
-      index:localStorage.getItem('cities') ? JSON.parse(localStorage.getItem('cities')).length : 0,
-  name:props.city.name,
-    temp:props.city.main.temp,
-    wind:props.city.wind.speed,
-    pressure:props.city.main.pressure,
-    humidity:props.city.main.humidity
-    }]
+const CityList = React.memo((props) => {
+      const {
+        push
+      } = useHistory();
+      const [retrieved_object, setObject] = useState(null)
+      const [newCity, setNewCity] = useState(null)
 
-useEffect(() =>{
-  
- 
-console.log(localStorage.getItem('cities'))
-if(localStorage.getItem('cities')!==null){
-  setObject(JSON.parse(localStorage.getItem('cities')))
-}
+      useEffect(() => {
+        //console.log(localStorage.getItem('cities'))
+        if (localStorage.getItem('cities') !== null) {
+          setObject(JSON.parse(localStorage.getItem('cities')))
+        }
 
-},[props])
-  
+      }, [])
+      useEffect(() => {
+
+        if (props.city.name !== "") {
+          setNewCity(props.city)
+        }
+
+      }, [props.city])
 
 
 
-useEffect(() =>{
+      useEffect(() => {
+        if (newCity !== null) {
 
-var old = localStorage.getItem('cities', JSON.stringify(newCity))
-//console.log(old)
-if(old===null){
-  
-  localStorage.setItem('cities', JSON.stringify(newCity))
-  setObject(JSON.parse(localStorage.getItem('cities')))
-}else{
-  old=JSON.parse(old);
-  localStorage.setItem('cities',JSON.stringify(old.concat(newCity)))
-  setObject(JSON.parse(localStorage.getItem('cities')))
-}
 
-console.log(JSON.parse(localStorage.getItem('cities')).length)
+          var old = localStorage.getItem('cities', JSON.stringify(newCity))
+          if (old === null) {
 
-//console.log(retrieved_object)
-},[props])
+            localStorage.setItem('cities', JSON.stringify(newCity))
+            setObject(JSON.parse(localStorage.getItem('cities')))
+          } else {
+            old = JSON.parse(old);
+            localStorage.setItem('cities', JSON.stringify(old.concat(newCity)))
+            setObject(JSON.parse(localStorage.getItem('cities')))
+          }
+        }
+        //console.log(JSON.parse(localStorage.getItem('cities')).length)
 
-const removecity = (CityToRemove) =>{
-  var arr = [];
-  arr = JSON.parse(localStorage.getItem('cities')).filter((t) => t.index !== CityToRemove)
-  console.log(arr);
-  localStorage.setItem('cities', JSON.stringify(arr))
-  setObject(JSON.parse(localStorage.getItem('cities')))
-}
+        //console.log(retrieved_object)
+      }, [newCity])
+
+      const removecity = (CityToRemove) => {
+        var arr = [];
+        arr = JSON.parse(localStorage.getItem('cities')).filter((t) => t.index !== CityToRemove)
+        //console.log(arr);
+        localStorage.setItem('cities', JSON.stringify(arr))
+        setObject(JSON.parse(localStorage.getItem('cities')))
+      }
 
 
  
@@ -113,5 +111,5 @@ return (
 
 </div>
 );
-}
+})
 export default CityList;
