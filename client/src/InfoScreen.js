@@ -2,105 +2,111 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
-const InfoScreen = React.memo((props) =>{
-const { name } = useParams();
-const [Forecast,setForecast] = useState([]);
-const [CityResponse, setCityResponse]=useState(null);
-const [AverageTemp, setAverageTemp]=useState([])
-var date= new Date().toLocaleDateString('lt');
-const toggleClass = (e,index) =>{
-   let arrow_class = document.getElementsByClassName('arrow-icon');
-   let forecast_class=document.getElementsByClassName('forecast-card');
-   let forecast_box=document.getElementsByClassName('forecast-by-time-box');
-   //console.log(element_class)
-   arrow_class[index].classList.toggle('open');
-   
-   if(arrow_class[index].classList.contains('open')){
-   forecast_class[index].classList.add('opened-card');
-      forecast_class[index].classList.remove('closed-card');
-      
-     forecast_box[index].classList.remove('hidden-forecast');
-   }else{
-   forecast_box[index].classList.add('hidden-forecast');
-      forecast_class[index].classList.remove('opened-card');
-      forecast_class[index].classList.add('closed-card');
-      
-   }
-  
-   
-   
-}
-useEffect(() =>{
-console.log(name);
- axios.post("http://localhost:8080/weather",{cityInput:name})
-.then(response=>{
-   console.log(response)
-   if(response.status===200){
-      setCityResponse(response.data)
-      console.log(CityResponse)
-   }
-})
-.catch(error =>{
-   console.log(error);
-       })
-},[name])
+const InfoScreen = React.memo((props) => {
+         const {
+            name
+         } = useParams();
+         const [Forecast, setForecast] = useState([]);
+         const [CityResponse, setCityResponse] = useState(null);
+         const [AverageTemp, setAverageTemp] = useState([])
+         var date = new Date().toLocaleDateString('lt');
+         const toggleClass = (e, index) => {
+            let arrow_class = document.getElementsByClassName('arrow-icon');
+            let forecast_class = document.getElementsByClassName('forecast-card');
+            let forecast_box = document.getElementsByClassName('forecast-by-time-box');
+            //console.log(element_class)
+            arrow_class[index].classList.toggle('open');
 
+            if (arrow_class[index].classList.contains('open')) {
+               forecast_class[index].classList.add('opened-card');
+               forecast_class[index].classList.remove('closed-card');
 
- useEffect(() =>{
-    //console.log(name);
-    if(CityResponse!==null){
-   axios.post("http://localhost:8080/forecast/:name",{name:name})
- .then(res=>{
-    console.log(res)
-setForecast(res.data)
+               forecast_box[index].classList.remove('hidden-forecast');
+            } else {
+               forecast_box[index].classList.add('hidden-forecast');
+               forecast_class[index].classList.remove('opened-card');
+               forecast_class[index].classList.add('closed-card');
 
-//console.log(Forecast)
- })
-
- 
-    }
-
-  
- },[CityResponse])
-
-
-useEffect(()=>{
-   if(Forecast.length!==0){ 
-     getAverageTemp(Forecast);
-   }
-//console.log(Forecast)
-
-},[Forecast])
+            }
 
 
 
+         }
+         useEffect(() => {
+            //console.log(name);
+            axios.post("http://localhost:8080/weather", {
+                  cityInput: name
+               })
+               .then(response => {
+                  //console.log(response)
+                  if (response.status === 200) {
+                     setCityResponse(response.data)
+                     //console.log(CityResponse)
+                  }
+               })
+               .catch(error => {
+                  //console.log(error);
+               })
+         }, [name])
 
-const getAverageTemp = (forecastdata) =>{
-   
-const temps = forecastdata.list.map(x => x.main.temp)
-const dates= forecastdata.list.map(x => x.dt_txt.split(" ")[0]);
-const merged_array = [];
-let counts = [];
-for(var i=0;i<temps.length;i++){
-   merged_array.push(`${dates[i]} ${temps[i]}`)
-}
-dates.forEach(function(x) {counts[x]=(counts[x] || 0)+1});
-//console.log(counts);
-const splited_array=merged_array.map(x => x.split(" "))
-const average = splited_array.reduce((accumulator, currentValue) => {
-if(!accumulator[currentValue[0]]){
-   accumulator[currentValue[0]]=0;
-  
-}
-accumulator[currentValue[0]]+=Math.round(parseFloat(currentValue[1]/counts[currentValue[0]]))
-return accumulator
-},{});
-setAverageTemp(average);
-console.log(AverageTemp);
-//console.log(average)
-}
 
- 
+         useEffect(() => {
+            //console.log(name);
+            if (CityResponse !== null) {
+               axios.post("http://localhost:8080/forecast/:name", {
+                     name: name
+                  })
+                  .then(res => {
+                     //console.log(res)
+                     setForecast(res.data)
+
+                     //console.log(Forecast)
+                  })
+
+
+            }
+
+
+         }, [CityResponse])
+
+
+         useEffect(() => {
+            if (Forecast.length !== 0) {
+               getAverageTemp(Forecast);
+            }
+            //console.log(Forecast)
+
+         }, [Forecast])
+
+
+
+
+         const getAverageTemp = (forecastdata) => {
+
+            const temps = forecastdata.list.map(x => x.main.temp)
+            const dates = forecastdata.list.map(x => x.dt_txt.split(" ")[0]);
+            const merged_array = [];
+            let counts = [];
+            for (var i = 0; i < temps.length; i++) {
+               merged_array.push(`${dates[i]} ${temps[i]}`)
+            }
+            dates.forEach(function (x) {
+               counts[x] = (counts[x] || 0) + 1
+            });
+            //console.log(counts);
+            const splited_array = merged_array.map(x => x.split(" "))
+            const average = splited_array.reduce((accumulator, currentValue) => {
+               if (!accumulator[currentValue[0]]) {
+                  accumulator[currentValue[0]] = 0;
+
+               }
+               accumulator[currentValue[0]] += Math.round(parseFloat(currentValue[1] / counts[currentValue[0]]))
+               return accumulator
+            }, {});
+            setAverageTemp(average);
+            //console.log(AverageTemp);
+            //console.log(average)
+         }
 
 return (
 <div className="Info-screen">
