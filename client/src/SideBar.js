@@ -53,7 +53,7 @@ const SideBar = () => {
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      axios.post('http://localhost:8080/weather', Form)
+      axios.post('https://weather-app-expressjs-server.herokuapp.com/weather', Form)
         .then(response => {
           // console.log(response)
           if (response.status === 200) {

@@ -34,7 +34,7 @@ const InfoScreen = React.memo((props) => {
          }
          useEffect(() => {
             //console.log(name);
-            axios.post("http://localhost:8080/weather", {
+            axios.post("https://weather-app-expressjs-server.herokuapp.com/weather", {
                   cityInput: name
                })
                .then(response => {
