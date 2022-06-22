@@ -8,7 +8,8 @@ backend/node_modules
 
 # testing
 /coverage
-
+.env.development
+.env.production
 # production
 client/build
 
