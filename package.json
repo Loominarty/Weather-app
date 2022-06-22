@@ -9,12 +9,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Loominarty/Weather-app.git"
+    "url": "git+https://github.com/LukasBrizgys/Weather-app.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Loominarty/Weather-app/issues"
+    "url": "https://github.com/LukasBrizgys/Weather-app/issues"
   },
   "homepage": "https://weatherapp-frontend-react.herokuapp.com"
 }
