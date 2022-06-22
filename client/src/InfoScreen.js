@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
-const InfoScreen = React.memo((props) => {
+const InfoScreen = React.memo(() => {
          const {
             name
          } = useParams();
@@ -28,54 +28,32 @@ const InfoScreen = React.memo((props) => {
                forecast_class[index].classList.add('closed-card');
 
             }
-
-
-
          }
-         useEffect(() => {
+   useEffect(() => {
             //console.log(name);
-            axios.post("https://weather-app-expressjs-server.herokuapp.com/weather", {
-                  cityInput: name
-               })
-               .then(response => {
-                  //console.log(response)
-                  if (response.status === 200) {
-                     setCityResponse(response.data)
-                     //console.log(CityResponse)
-                  }
-               })
-               .catch(error => {
-                  //console.log(error);
-               })
-         }, [name])
-
-
-         useEffect(() => {
-            //console.log(name);
-            if (CityResponse !== null) {
-               axios.post("https://weather-app-expressjs-server.herokuapp.com/forecast/:name", {
-                     name: name
-                  })
-                  .then(res => {
-                     //console.log(res)
-                     setForecast(res.data)
-
-                     //console.log(Forecast)
-                  })
-
-
+      axios.get(`${process.env.REACT_APP_SERVER_URL}/city/${name}`)
+      .then(response => {
+         //console.log(response)
+         if (response.status === 200) {
+            setCityResponse(response.data)
+            //console.log(CityResponse)
             }
-
-
-         }, [CityResponse])
-
+      })
+      .catch(error => {
+         //console.log(error);
+      })
+      axios.get(`${process.env.REACT_APP_SERVER_URL}/forecast/${name}`)
+      .then(res => {
+         setForecast(res.data)
+      })
+      
+   }, [name])
 
          useEffect(() => {
             if (Forecast.length !== 0) {
                getAverageTemp(Forecast);
             }
             //console.log(Forecast)
-
          }, [Forecast])
 
 
@@ -110,65 +88,42 @@ const InfoScreen = React.memo((props) => {
 
 return (
 <div className="Info-screen">
-   
-   <div className="current-city-data">
-    
-<h2 className="current-city-name">{CityResponse ? CityResponse.name : ''}</h2>
-<p className="current-date">{date}</p>
-<p className="current-city-temp">{CityResponse ? Math.round(CityResponse.main.temp) : ''}&#176;C</p>
-<p className="current-city-wind"><span className="wind-label">Vėjo greitis</span><br/>{CityResponse ? Math.round(CityResponse.wind.speed) : ''} m/s</p>
-<p className="current-city-pressure"><span className="pressure-label">Slėgis</span><br/>{CityResponse ? CityResponse.main.pressure : ''} mbar</p>
-<p className="current-city-humidity"><span className="humidity-label">Drėgmė</span><br/>{CityResponse ? CityResponse.main.humidity : ''}%</p>
+   <div className="current-city-data">   
+      <h2 className="current-city-name">{CityResponse && CityResponse.name}</h2>
+      <p className="current-date">{date}</p>
+      <p className="current-city-temp">{CityResponse && Math.round(CityResponse.info.temp)}&#176;C</p>
+      <p className="current-city-wind"><span className="wind-label">Vėjo greitis</span><br/>{CityResponse && Math.round(CityResponse.wind)} m/s</p>
+      <p className="current-city-pressure"><span className="pressure-label">Slėgis</span><br/>{CityResponse && CityResponse.info.pressure} mbar</p>
+      <p className="current-city-humidity"><span className="humidity-label">Drėgmė</span><br/>{CityResponse && CityResponse.info.humidity}%</p>
    </div>
-   <div className="forecast-data">
-{
+      <div className="forecast-data">
+   {
 
- AverageTemp ? Object.keys(AverageTemp).map((keyname,i) =>
-
- 
-
-   
-
-   
-    
-       
-      <div className="forecast-card closed-card" key={i} style={{animationDelay: `${i*1.5}s`}}>
-         
-       
-         <div className="forecast-info">
-
-
-
-
-            <div className="forecast-date">{keyname}</div>
-            <div className="forecast-average-temp">{AverageTemp[keyname]}&#176;C</div>
-
-
-            
-
-
-
-                  </div>
-                  <div className="forecast-by-time-box hidden-forecast">
-                  {Forecast.list.filter(date=>date.dt_txt.includes(keyname)).map(filtereddates=>(
-                     <div className="forecast-by-time" key={filtereddates.dt_txt}>
-<p className="time-for-temps">{filtereddates.dt_txt.slice(11,16)}</p>
-<p className="temps-by-time">{Math.round(filtereddates.main.temp)}&#176;C</p>
-</div>
- ))}
-                  </div>
-                  <div>
-                  <a className={"arrow-icon"} onClick={(e)=>toggleClass(e,i)}>
-  <span className="left-bar"></span>
-  <span className="right-bar"></span>
-</a>
-           </div>      
+   AverageTemp ? Object.keys(AverageTemp).map((keyname,i) =>
+   <div className="forecast-card closed-card" key={i} style={{animationDelay: `${i*1.5}s`}}>
+      <div className="forecast-info">
+         <div className="forecast-date">{keyname}</div>
+         <div className="forecast-average-temp">{AverageTemp[keyname]}&#176;C</div>
       </div>
-      
-  ):"Kraunama"
-   
-}
+      <div className="forecast-by-time-box hidden-forecast">
+         {Forecast.list.filter(date=>date.dt_txt.includes(keyname)).map(filtereddates=>(
+            <div className="forecast-by-time" key={filtereddates.dt_txt}>
+            <p className="time-for-temps">{filtereddates.dt_txt.slice(11,16)}</p>
+            <p className="temps-by-time">{Math.round(filtereddates.main.temp)}&#176;C</p>
+            </div>
+         ))}
+      </div>
+      <div>
+         <a className={"arrow-icon"} onClick={(e)=>toggleClass(e,i)}>
+         <span className="left-bar"></span>
+         <span className="right-bar"></span>
+         </a>
+      </div>      
    </div>
+   ):"Kraunama"
+      
+   }
+      </div>
 </div>
 
 
