@@ -5,10 +5,12 @@ export const appendToLocalStorage = (newCity) => {
     cityArray.push(newCity);
     localStorage.setItem('cities', JSON.stringify(cityArray.toString()));
 }
-
 export const removeFromLocalStorage = (cityToRemove) => {
-    const cityArray = JSON.parse(localStorage.getItem('cities'));
-    localStorage.setItem('cities', cityArray.filter((city) => city !== cityToRemove))
+    const storage = JSON.parse(localStorage.getItem('cities'));
+    if(!storage) return;
+    const cityArray = storage.toString().split(',');
+    const filteredArray = cityArray.filter((city) => city !== cityToRemove);
+    localStorage.setItem('cities', JSON.stringify(filteredArray.toString()));
 }
 
 export const getLocalStorageItems = () => {
@@ -17,14 +19,13 @@ export const getLocalStorageItems = () => {
 }
 
 export const getLocalStorageItemCount = () => {
-    const cityArray = [];
-    const storage = JSON.parse(localStorage.getItem('cities'));
-    if(storage) cityArray.push(storage);
+    const cityArray = JSON.parse(localStorage.getItem('cities')).split(',') || [];
     return cityArray.length;
 }
 
 export const isCityInLocalStorage = (city) => {
-    const cityArray = localStorage.getItem('cities');
-    if(!cityArray) return false;
-    return cityArray.includes(city) ? true : false;
+    const cityToCheck = city.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+    const cityString = localStorage.getItem('cities').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+    if(!cityString) return false;
+    return cityString.toLowerCase().includes(cityToCheck) ? true : false;
 }
