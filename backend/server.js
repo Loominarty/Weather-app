@@ -70,14 +70,28 @@ app.post('/multipleWeather', async(req, res) => {
 })
 app.get('/forecast/:name', async(req,res) => {
   try{
-    let city=req.params.name;
-city = normalizeName(city);
-forecast_url=url_2+city+exclude+"&appid="+api+units;
-    //const apiResponse = await got.get(forecast_url).json();
-    //if(!apiResponse) throw new Error('Error occured in fetching data');
-    //console.log(apiResponse);
-    //res.send(apiResponse);
+    let city = req.params.name;
+    city = normalizeName(city);
+    forecast_url = url_2 + city + exclude + "&appid=" + api + units;
+    
+    const weatherByDate = {};
+    const cityInfo = {id: data.city.id, name: data.city.name};
+     const apiResponse = await got.get(forecast_url).json();
+    if(!apiResponse) throw new Error('Error occured in fetching data');
+    apiResponse.list.map((element) => {
+      const date = element.dt_txt.split(' ')[0];
+      const time  = element.dt_txt.split(' ')[1];
+      const timeInfo = {time: time, temp: element.main.temp, pressure: element.main.pressure, humidity: element.main.humidity, wind: element.wind.speed}
+      if(!weatherByDate[date]){
+        weatherByDate[date] = [];
+      }
+      weatherByDate[date].push(timeInfo); 
+    });
+   
+    res.send({forecast: weatherByDate, cityInfo: cityInfo});
+
   }catch(error) {
+    console.log(error);
     res.status(400).send('An error occured:' + error);
   }
 
